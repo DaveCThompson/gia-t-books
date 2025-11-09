@@ -21,12 +21,11 @@ interface PageProps {
 const Page: React.FC<PageProps> = ({ pageData }) => {
   const parserOptions: HTMLReactParserOptions = {
     replace: (domNode) => {
-      // FIX: Now checking for 'interactive' tag
+      // FIX: Now correctly looking for the 'interactive' tag
       if (domNode instanceof Element && domNode.name === 'interactive') {
         const definition = domNode.attribs.definition || 'No definition available.';
         
         return (
-          // NOTE: The Tooltip.Root is now inside the parser, but the Provider is outside.
           <Tooltip.Root>
             <Tooltip.Trigger asChild>
               <span className={styles.interactiveWord}>
@@ -46,7 +45,6 @@ const Page: React.FC<PageProps> = ({ pageData }) => {
   };
 
   return (
-    // FIX: A single Tooltip.Provider now wraps the entire page content.
     <Tooltip.Provider delayDuration={100}>
       <div className={styles.pageContainer}>
         {pageData.illustration && (
@@ -54,12 +52,13 @@ const Page: React.FC<PageProps> = ({ pageData }) => {
             className={styles.imageContainer}
             style={{ maskImage: `url(${pageData.mask})`, WebkitMaskImage: `url(${pageData.mask})` }}
           >
+            {/* FIX: Using the modern `fill` prop on the Image component */}
             <Image
               src={pageData.illustration}
               alt={`Illustration for page ${pageData.pageNumber}`}
-              layout="fill"
-              objectFit="cover"
-              priority={true} // Helps load the first visible image faster
+              fill
+              className={styles.imageFill} // Apply styles directly to the image
+              priority={true}
             />
           </div>
         )}
