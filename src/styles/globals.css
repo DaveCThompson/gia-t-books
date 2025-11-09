@@ -33,8 +33,9 @@
     --color-text: #eeeeee;
     --color-interactive: #58a6ff;
     --color-interactive-underline: rgba(88, 166, 255, 0.4);
-    --color-tooltip-background: #c0c0c0;
-    --color-tooltip-text: #111111;
+    /* FIX: Changed tooltip background to a darker, more opaque color */
+    --color-tooltip-background: #2f2f2f;
+    --color-tooltip-text: #eeeeee;
     --color-button-background: rgba(34, 34, 34, 0.8);
     --color-button-border: #444444;
     --color-button-text: #eeeeee;
