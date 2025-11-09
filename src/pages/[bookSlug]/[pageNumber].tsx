@@ -1,34 +1,26 @@
 // src/pages/[bookSlug]/[pageNumber].tsx
 
 import React from 'react';
-// FIX: Import GetStaticProps and GetStaticPaths instead of GetServerSideProps
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import BookReader from '@/features/BookReader/BookReader';
 import { BookData } from '@/data/types';
-import slimeyData from '@/books/slimey/data.json';
+import { bookDataMap } from '@/data/constants'; // Use centralized data map
 
 interface BookPageProps {
   bookData: BookData;
   currentPage: number;
 }
 
-const bookDataMap: { [key: string]: BookData } = {
-  slimey: slimeyData,
-};
-
 const BookPage: NextPage<BookPageProps> = ({ bookData, currentPage }) => {
   if (!bookData) {
-    // This case should not be hit with getStaticPaths, but it's good practice
     return <div>Book not found.</div>;
   }
   return <BookReader bookData={bookData} currentPage={currentPage} />;
 };
 
-// FIX: Replaced getServerSideProps with getStaticPaths
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = [];
 
-  // Loop through all books and all pages to generate a path for each
   for (const slug in bookDataMap) {
     const book = bookDataMap[slug];
     for (const page of book.pages) {
@@ -43,11 +35,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false, // Any path not defined here will result in a 404
+    fallback: false,
   };
 };
 
-// FIX: Replaced getServerSideProps with getStaticProps
 export const getStaticProps: GetStaticProps = async (context) => {
   const { bookSlug, pageNumber } = context.params || {};
 

@@ -10,28 +10,32 @@ export const useAudioPlayer = () => {
   const stop = useCallback(() => {
     if (soundRef.current) {
       soundRef.current.stop();
-      setIsPlaying(false);
     }
   }, []);
 
-  const play = useCallback((src: string) => {
-    // Stop any currently playing sound before starting a new one
-    stop();
+  const play = useCallback(
+    (src: string) => {
+      // Stop any currently playing sound before starting a new one
+      if (soundRef.current) {
+        soundRef.current.stop();
+      }
 
-    const sound = new Howl({
-      src: [src],
-      html5: true, // Important for broad compatibility
-      onplay: () => setIsPlaying(true),
-      onpause: () => setIsPlaying(false),
-      onstop: () => setIsPlaying(false),
-      onend: () => setIsPlaying(false),
-    });
+      const sound = new Howl({
+        src: [src],
+        html5: true, // Important for broad compatibility
+        onplay: () => setIsPlaying(true),
+        onpause: () => setIsPlaying(false),
+        onstop: () => setIsPlaying(false),
+        onend: () => setIsPlaying(false),
+      });
 
-    sound.play();
-    soundRef.current = sound;
-  }, [stop]);
+      sound.play();
+      soundRef.current = sound;
+    },
+    [] // No dependencies needed here
+  );
 
-  // Cleanup effect to stop audio when the component unmounts
+  // Cleanup effect to stop audio when the component that uses this hook unmounts
   useEffect(() => {
     return () => {
       stop();

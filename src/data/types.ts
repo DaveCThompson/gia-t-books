@@ -5,6 +5,7 @@
 export interface PageData {
   pageNumber: number;
   text: string;
+  // FIX: Make illustration and mask optional properties to match the data
   illustration?: string;
   mask?: string;
   narrationUrl?: string;

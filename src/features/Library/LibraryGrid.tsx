@@ -1,11 +1,26 @@
+// src/features/Library/LibraryGrid.tsx
+
 import React from 'react';
+import { BookData } from '@/data/types';
+import BookCover from './BookCover';
 import styles from './LibraryGrid.module.css';
 
-const LibraryGrid = () => {
+interface LibraryGridProps {
+  books: BookData[];
+}
+
+const LibraryGrid: React.FC<LibraryGridProps> = ({ books }) => {
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Slimey by Gia</h1>
-      <p>Book covers will be displayed here.</p>
+    <div className={styles.pageContainer}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Gia's Books</h1>
+        <p className={styles.subtitle}>Select a story to begin</p>
+      </header>
+      <div className={styles.grid}>
+        {books.map((book) => (
+          <BookCover key={book.slug} book={book} />
+        ))}
+      </div>
     </div>
   );
 };

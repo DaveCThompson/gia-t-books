@@ -42,7 +42,7 @@ This project is a high-craft proof-of-concept for a mobile-first, interactive ch
 -   **/src/books**: Contains self-contained book content modules, each with its own `data.json` and co-located `assets`.
 -   **/src/features**: Contains major, user-facing areas of the application, organized into "vertical slices" of functionality (e.g., `/BookReader`, `/Library`).
 -   **/src/components**: Contains only **truly generic and reusable** UI primitives that are application-agnostic.
--   **/src/data**: A consolidated directory for all non-visual logic (Zustand store, custom hooks, constants).
+-   **/src/data**: A single, consolidated directory for all non-visual logic, including the Zustand store, custom hooks, type definitions, and application-wide constants.
 -   **/src/styles**: Contains the global styling architecture, including `globals.css` for resets and `fonts.css`.
 
 ## 5. Styling Architecture
@@ -57,5 +57,9 @@ The project uses **CSS Modules** for a robust, component-scoped styling strategy
 
 The project uses **Zustand** for its minimal and powerful state management model.
 
--   **Centralized Store:** Global UI state (e.g., the current reading mode) is managed in a central store located in `src/data/store/settings.ts`.
+-   **Centralized Store:** Global UI state (e.g., the current reading mode) is managed in a central store located in `src/data/settings.ts`.
 -   **Persistence:** The store uses Zustand's `persist` middleware to automatically save and rehydrate user settings from `localStorage`, ensuring a consistent experience between sessions.
+
+## 7. Developer Notes
+
+-   **File Naming Convention:** When providing files to the AI agent, TypeScript files (`.ts`, `.tsx`) may be uploaded with a `.txt` extension. The filenames are correct on the local file system.

@@ -1,22 +1,29 @@
 // src/pages/index.tsx
 
 import React from 'react';
-import Link from 'next/link';
 import LibraryGrid from '@/features/Library/LibraryGrid';
+import { allBooks } from '@/data/constants';
+import { BookData } from '@/data/types';
 
-const HomePage = () => {
+interface HomePageProps {
+  books: BookData[];
+}
+
+const HomePage: React.FC<HomePageProps> = ({ books }) => {
   return (
     <div>
-      <LibraryGrid />
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <h2>Development Links</h2>
-        {/* The fix is to remove the inner <a> tag and move its props to the Link component */}
-        <Link href="/slimey/1" style={{ color: 'blue', textDecoration: 'underline' }}>
-          Go to Slimey - Page 1
-        </Link>
-      </div>
+      {/* FIX: The `books` prop was not being passed to the component. */}
+      <LibraryGrid books={books} />
     </div>
   );
 };
+
+export async function getStaticProps() {
+  return {
+    props: {
+      books: allBooks,
+    },
+  };
+}
 
 export default HomePage;
