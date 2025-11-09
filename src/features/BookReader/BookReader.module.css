@@ -1,0 +1,12 @@
+/* src/features/BookReader/BookReader.module.css */
+
+.bookReaderContainer {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.swiperContainer {
+  width: 100%;
+  height: 100%;
+}

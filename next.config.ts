@@ -1,8 +1,10 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
+  // FIX: Add the images configuration to allowlist external domains.
+  images: {
+    domains: ['picsum.photos'],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

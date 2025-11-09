@@ -1,40 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+// GIA-CODE/gia-t-books/README.md
 
-## Getting Started
+# Interactive Storybook: "Slimey" POC
 
-First, run the development server:
+This project is a high-craft proof-of-concept for a mobile-first, interactive children's storybook platform. The initial release features the book **"Slimey,"** written by **Gia**. It is built on a robust foundation of modern web technologies to create a delightful, engaging, and scalable reading experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 1. Core Principles
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+-   **Mobile-First Design:** Layouts, components, and interactions are designed for touch-based devices first, then gracefully enhanced for larger screens.
+-   **High-Craft UI:** All interactions are designed to be smooth, intuitive, and visually polished, leveraging performant animations and a consistent design language.
+-   **Component-Based Architecture:** The UI is composed of small, reusable, and accessible components built on top of Radix UI primitives.
+-   **Simple & Scalable State:** Global state is managed with Zustand, ensuring a minimal, performant, and predictable state layer with built-in persistence.
+-   **Building a Scalable Platform:** The architecture is designed from the ground up to support a full library of books, not just a single story.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 2. Technology Stack
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+-   **Framework:** Next.js
+-   **Language:** TypeScript
+-   **Styling:** CSS Modules for component-scoped styles, with a global stylesheet for base styles and fonts.
+-   **State Management:** Zustand
+-   **Animation:** Framer Motion
+-   **UI Primitives:** Radix UI
+-   **Page Swiping:** Swiper.js
+-   **Audio Management:** Howler.js
+-   **Content Parser:** html-react-parser
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 3. Proof-of-Concept Features
 
-## Learn More
+-   **Swipe Navigation:** A smooth, horizontal swipe gesture for navigating between pages of the book.
+-   **Dual Reading Modes:** A user-selectable choice between an automated "Read to Me" mode with narration and an "I'll Read" mode for self-paced reading.
+-   **Interactive Vocabulary:** Tappable words that reveal definitions in a tooltip.
+-   **Expressive Typography:** Dynamic use of fonts and styles to make the text an integral part of the storytelling.
+-   **Artistic Visuals:**
+    -   **Image Masking:** Illustrations are presented within artistic, non-rectangular frames.
+    -   **Dynamic Text Flow:** Text intelligently wraps around the contours of transparent images.
 
-To learn more about Next.js, take a look at the following resources:
+## 4. Directory Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+-   **/src**: Contains all application source code.
+-   **/src/books**: Contains self-contained book content modules, each with its own `data.json` and co-located `assets`.
+-   **/src/features**: Contains major, user-facing areas of the application, organized into "vertical slices" of functionality (e.g., `/BookReader`, `/Library`).
+-   **/src/components**: Contains only **truly generic and reusable** UI primitives that are application-agnostic.
+-   **/src/data**: A consolidated directory for all non-visual logic (Zustand store, custom hooks, constants).
+-   **/src/styles**: Contains the global styling architecture, including `globals.css` for resets and `fonts.css`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 5. Styling Architecture
 
-## Deploy on Vercel
+The project uses **CSS Modules** for a robust, component-scoped styling strategy.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   **Local by Default:** Every component is paired with its own `[ComponentName].module.css` file. All class names are locally scoped by default, preventing style collisions.
+-   **Global Styles:** A single `src/styles/globals.css` file is used for CSS resets, font definitions, and root-level CSS Custom Properties (variables). It is the only global stylesheet.
+-   **Composition:** Where needed, class names are composed using utility libraries or template literals to apply multiple styles conditionally.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## 6. State Management
+
+The project uses **Zustand** for its minimal and powerful state management model.
+
+-   **Centralized Store:** Global UI state (e.g., the current reading mode) is managed in a central store located in `src/data/store/settings.ts`.
+-   **Persistence:** The store uses Zustand's `persist` middleware to automatically save and rehydrate user settings from `localStorage`, ensuring a consistent experience between sessions.

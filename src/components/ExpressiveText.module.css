@@ -1,0 +1,9 @@
+/* src/components/ExpressiveText.module.css */
+
+/* Define styles that match the 'style' attribute in your data.json */
+.shimmer {
+  color: #5a8ec9;
+  font-weight: bold;
+  font-style: italic;
+  text-shadow: 0 0 2px rgba(90, 142, 201, 0.3);
+}

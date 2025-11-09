@@ -1,42 +1,52 @@
+/* src/styles/globals.css */
+
+/* 
+  This is the foundation of our theming system.
+  We define all colors and fonts as CSS Custom Properties (variables).
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+
+  /* Light Theme (Default) */
+  --color-background: #ffffff;
+  --color-text: #222222;
+  --color-interactive: #0070f3;
+  --color-interactive-underline: rgba(0, 112, 243, 0.4);
+  --color-tooltip-background: #111111;
+  --color-tooltip-text: #ffffff;
+  --color-button-background: rgba(255, 255, 255, 0.8);
+  --color-button-border: #dddddd;
+  --color-button-text: #333333;
+  --color-button-background-hover: #f0f0f0;
 }
 
+/* Dark Theme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-background: #1a1a1a;
+    --color-text: #eeeeee;
+    --color-interactive: #58a6ff;
+    --color-interactive-underline: rgba(88, 166, 255, 0.4);
+    --color-tooltip-background: #c0c0c0;
+    --color-tooltip-text: #111111;
+    --color-button-background: rgba(34, 34, 34, 0.8);
+    --color-button-border: #444444;
+    --color-button-text: #eeeeee;
+    --color-button-background-hover: #333333;
   }
 }
 
-html,
+/* Basic CSS Reset and Body Styles */
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.2s, color 0.2s;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
