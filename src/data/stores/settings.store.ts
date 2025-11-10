@@ -1,6 +1,6 @@
-// src/data/settings.ts
+// src/data/stores/settings.store.ts
 
-import { create } from 'zustand'; // FIX: Changed from default to named import
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type ReadingMode = 'narrated' | 'selfRead';
@@ -14,9 +14,8 @@ export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
       readingMode: 'selfRead',
-      // FIX: Added explicit type for the 'state' parameter
       toggleReadingMode: () =>
-        set((state: SettingsState) => ({
+        set((state) => ({
           readingMode:
             state.readingMode === 'narrated' ? 'selfRead' : 'narrated',
         })),

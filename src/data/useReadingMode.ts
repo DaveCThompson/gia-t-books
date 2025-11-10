@@ -1,6 +1,6 @@
 // src/data/useReadingMode.ts
 
-import { useSettingsStore } from './settings';
+import { useSettingsStore } from './stores/settings.store';
 
 /**
  * A custom hook to access reading mode state and actions.

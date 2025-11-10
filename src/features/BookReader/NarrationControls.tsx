@@ -1,7 +1,7 @@
 // src/features/BookReader/NarrationControls.tsx
 
 import React from 'react';
-import { useSettingsStore } from '@/data/settings';
+import { useSettingsStore } from '@/data/stores/settings.store';
 import styles from './NarrationControls.module.css';
 
 const NarrationControls = () => {

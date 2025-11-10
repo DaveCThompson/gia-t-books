@@ -3,22 +3,45 @@
 import React from 'react';
 import Image from 'next/image';
 import * as Tooltip from '@radix-ui/react-tooltip';
+import { motion, Variants } from 'framer-motion'; // Import the Variants type
 import { PageData } from '@/data/types';
-import { InteractiveText } from './InteractiveText'; // Import the new component
+import { InteractiveText } from './InteractiveText';
 import styles from './Page.module.css';
 
 interface PageProps {
   pageData: PageData;
+  isActive: boolean;
 }
 
-const Page: React.FC<PageProps> = ({ pageData }) => {
+// Explicitly type the variants object with the Variants type
+const pageVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
+const Page: React.FC<PageProps> = ({ pageData, isActive }) => {
   return (
     <Tooltip.Provider delayDuration={100}>
-      <div className={styles.pageContainer}>
+      <motion.div
+        className={styles.pageContainer}
+        variants={pageVariants}
+        initial="hidden"
+        animate={isActive ? 'visible' : 'hidden'}
+      >
         {pageData.illustration && (
           <div
             className={styles.imageContainer}
-            style={{ maskImage: `url(${pageData.mask})`, WebkitMaskImage: `url(${pageData.mask})` }}
+            style={{
+              maskImage: `url(${pageData.mask})`,
+              WebkitMaskImage: `url(${pageData.mask})`,
+            }}
           >
             <Image
               src={pageData.illustration}
@@ -30,10 +53,9 @@ const Page: React.FC<PageProps> = ({ pageData }) => {
           </div>
         )}
         <p className={styles.text}>
-          {/* All parsing logic is now handled by this single, dedicated component */}
           <InteractiveText text={pageData.text} />
         </p>
-      </div>
+      </motion.div>
     </Tooltip.Provider>
   );
 };

@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run sync:assets && next dev",
+    "build": "npm run validate && npm run sync:assets && next build",
     "start": "next start",
     "lint": "next lint",
+    "validate": "node ./src/scripts/validate-content.mjs",
+    "sync:assets": "node ./src/scripts/sync-assets.mjs",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d out"
   },
@@ -29,7 +31,11 @@
     "@types/react-dom": "^18.3.0",
     "eslint": "^8",
     "eslint-config-next": "^14.2.5",
+    "eslint-config-prettier": "^9.1.0",
+    "fs-extra": "^11.2.0",
     "gh-pages": "^6.1.1",
-    "typescript": "^5"
+    "glob": "^11.0.0",
+    "typescript": "^5",
+    "zod": "^3.23.8"
   }
 }
